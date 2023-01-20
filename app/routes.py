@@ -42,3 +42,17 @@ def signUpPage():
 
 
     return render_template('signup.html', form = form )
+
+
+@app.route('/pokeform', methods =['GET', 'POST'])
+def pokemonPicker():
+    form = PokemonPickerForm()
+    print(request.method)
+    if request.method == 'POST':
+        pokemon = form.pokemon.data
+        print(pokemon)
+
+        pokemon =saveToDB()
+        return redirect(url_for('poke-catch'), form = form)
+
+    return render_template('pokeform.html')
